@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WooCommerce Data Prep</title>
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <div id="app">
+
+    <header class="app-header">
+      <div class="header-inner">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+          <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+        </svg>
+        <h1>WooCommerce Data Prep</h1>
+        <span class="header-sub">Siteline ERP &rarr; WooCommerce</span>
+      </div>
+    </header>
+
+    <main class="app-main">
+
+      <!-- ── Upload ──────────────────────────────────────────────────────── -->
+      <section id="upload-section" class="upload-section">
+        <div id="drop-zone" class="drop-zone" role="button" tabindex="0" aria-label="Upload ERP CSV file">
+          <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          <p class="drop-text">Drop the Siteline ERP export here</p>
+          <p class="drop-sub">or</p>
+          <label for="file-input" class="browse-btn">Browse Files</label>
+          <input type="file" id="file-input" accept=".csv">
+          <p class="supported-formats">CSV format &nbsp;&middot;&nbsp; Siteline ERP export</p>
+        </div>
+      </section>
+
+      <!-- ── Results ────────────────────────────────────────────────────── -->
+      <section id="results-section" class="results-section hidden">
+
+        <div class="results-toolbar">
+          <div class="file-info">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <span id="source-filename" class="file-name"></span>
+          </div>
+          <div class="toolbar-actions">
+            <button id="download-btn" class="download-btn" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Download WooCommerce CSV
+            </button>
+            <button id="clear-btn" class="clear-btn" title="Start over">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="12" height="12">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row" id="stats-row"></div>
+
+        <!-- Warnings -->
+        <div id="warnings-panel" class="warnings-panel hidden">
+          <div class="warnings-header" id="warnings-toggle" role="button" tabindex="0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            <span id="warnings-title"></span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="12" height="12">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+          <ul id="warnings-list" class="warnings-list hidden"></ul>
+        </div>
+
+        <!-- Preview table -->
+        <div class="preview-wrap">
+          <p class="preview-label">Preview &mdash; first 10 rows of converted output</p>
+          <div class="preview-scroll">
+            <table class="preview-table" id="preview-table">
+              <thead>
+                <tr>
+                  <th>SKU</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Category</th>
+                  <th>Images</th>
+                  <th>Bullets</th>
+                  <th>Weight&nbsp;(kg)</th>
+                </tr>
+              </thead>
+              <tbody id="preview-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <div id="error-toast" class="error-toast hidden" role="alert"></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
