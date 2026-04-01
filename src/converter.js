@@ -203,7 +203,7 @@ export function convertRow(row) {
     'External URL':             '',
     'Button text':              '',
     'Position':                 '',
-    'meta:part-code':           get(row, 'Part_No').replace(/-/g, ''),
+    'meta:part-code':           get(row, 'Part_No'),
     ...buildAttributes(row),
   };
 }
