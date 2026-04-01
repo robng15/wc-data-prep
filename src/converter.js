@@ -92,6 +92,7 @@ const BASE_COLUMNS = [
   'Download limit', 'Download expiry days', 'Parent',
   'Grouped products', 'Upsells', 'Cross-sells',
   'External URL', 'Button text', 'Position',
+  'meta:part-code',
 ];
 
 const ATTR_COLUMNS = ATTRIBUTES.flatMap((_, i) => [
@@ -202,6 +203,7 @@ export function convertRow(row) {
     'External URL':             '',
     'Button text':              '',
     'Position':                 '',
+    'meta:part-code':           get(row, 'Part_No').replace(/-/g, ''),
     ...buildAttributes(row),
   };
 }
