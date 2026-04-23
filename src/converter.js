@@ -160,6 +160,7 @@ function buildAttributes(row) {
 export function convertRow(row) {
   const sub1 = get(row, 'Subheader1');
   const sub2 = get(row, 'Subheader2');
+  const sub3 = get(row, 'Subheader3');
 
   return {
     'ID':                       '',
@@ -189,7 +190,7 @@ export function convertRow(row) {
     'Purchase note':            '',
     'Sale price':               '',
     'Regular price':            get(row, 'Trade_Price'),
-    'Categories':               sub1 && sub2 ? `${sub1} > ${sub2}` : sub1,
+    'Categories':               [sub1, sub2, sub3].filter(Boolean).join(' > '),
     'Tags':                     '',
     'Shipping class':           '',
     'Images':                   buildImages(row),
