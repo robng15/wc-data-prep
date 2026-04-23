@@ -147,7 +147,7 @@ function buildAttributes(row) {
   const out = {};
   ATTRIBUTES.forEach(({ name, field }, i) => {
     const n = i + 1;
-    out[`Attribute ${n} name`]     = name;
+    out[`Attribute ${n} name`]     = name.slice(0, 28);
     out[`Attribute ${n} value(s)`] = get(row, field);
     out[`Attribute ${n} visible`]  = '1';
     out[`Attribute ${n} global`]   = '1';
