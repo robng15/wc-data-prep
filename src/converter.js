@@ -130,13 +130,12 @@ function buildShortDescription(row) {
 }
 
 function buildImages(row) {
-  return ['Wiring_Image', 'Item_Image', 'Dimension_Image']
-    .map(field => {
-      const filename = get(row, field);
-      return filename ? IMAGE_BASES[field] + filename : '';
-    })
-    .filter(Boolean)
-    .join(',');
+  const wiringUrl    = get(row, 'Wiring_Image')    ? IMAGE_BASES.Wiring_Image    + get(row, 'Wiring_Image')    : '';
+  const lifestyleUrl = get(row, 'Lifestyle_Image');
+  const itemUrl      = get(row, 'Item_Image')      ? IMAGE_BASES.Item_Image      + get(row, 'Item_Image')      : '';
+  const dimUrl       = get(row, 'Dimension_Image') ? IMAGE_BASES.Dimension_Image + get(row, 'Dimension_Image') : '';
+
+  return [wiringUrl, lifestyleUrl, itemUrl, dimUrl].filter(Boolean).join(',');
 }
 
 function buildWeight(row) {
